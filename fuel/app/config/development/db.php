@@ -20,11 +20,22 @@
  */
 
 return array(
-	'default' => array(
-		'connection' => array(
-			'dsn'      => 'mysql:host=localhost;dbname=fuel_dev',
-			'username' => 'root',
-			'password' => 'root',
-		),
-	),
+    'default' => array(
+        'type'           => 'mysqli',
+        'connection'     => array(
+            'hostname'       => 'fuelphp_mysql',
+            'port'           => '3306',
+            'database'       => 'emp',
+            'username'       => 'emp',
+            'password'       => 'EMP',
+            'persistent'     => false,
+            'compress'       => false,
+        ),
+        'identifier'     => '`',
+        'table_prefix'   => '',
+        'charset'        => 'utf8mb4',
+        'enable_cache'   => true,
+        'profiling'      => false,
+        'readonly'       => false,
+    ),
 );

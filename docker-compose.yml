@@ -1,0 +1,30 @@
+version: '2'
+services:
+  fuelphp_apache2:
+    image: phpstorm/php-73-apache-xdebug-27
+    container_name: fuelphp_apache2
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+    #      - ./docker/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal
+    depends_on:
+      - fuelphp_mysql
+
+  fuelphp_mysql:
+    image: mysql:latest
+    container_name: fuelphp_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ROOT
+      MYSQL_DATABASE: emp
+      MYSQL_USER: emp
+      MYSQL_PASSWORD: EMP
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
